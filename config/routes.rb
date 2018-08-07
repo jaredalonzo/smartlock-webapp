@@ -1,8 +1,10 @@
-Rails.application.routes.draw do
-  get 'welcome/index'
+require 'json'
+require 'net/http'
+require 'uri'
 
+Rails.application.routes.draw do
   resources :users
-  
-  root 'welcome#index'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root to: redirect('/auth/smartthings')
+
+  get 'oauth/callback' => 'application#authentication_callback'
 end
