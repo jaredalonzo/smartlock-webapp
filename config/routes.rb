@@ -1,10 +1,6 @@
-require 'json'
-require 'net/http'
-require 'uri'
+Rails.application.routes.draw do |map|
+  root :to => 'welcome#index'
 
-Rails.application.routes.draw do
+  get '/auth/smartthings/callback' => 'authentication#create'
   resources :users
-  root to: redirect('/auth/smartthings')
-
-  get 'oauth/callback' => 'application#authentication_callback'
 end

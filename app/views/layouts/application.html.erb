@@ -4,6 +4,9 @@
     <title>Smartlock</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <div id='user_nav'>
+      <%= link_to "Sign in", "/auth/smartthings" %>
+    </div>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
