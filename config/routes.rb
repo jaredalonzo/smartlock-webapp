@@ -1,7 +1,6 @@
 Rails.application.routes.draw do |map|
-  #get '/auth/:provider/callback' => 'authentication#create'
-  root :to => 'welcome#index'
-  get '/oauth/callback', :to => 'authentication#create'
+  root 'welcome#index'
+  get '/oauth/callback' => 'auth#get_token'
 
   resources :users
 end

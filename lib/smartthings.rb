@@ -15,13 +15,25 @@ module OmniAuth
         redirect client.auth_code.authorize_url(redirect_uri: 'http://localhost:4567/oauth/callback', scope: 'app')
       end
 
-      def build_access_token
-        verifier = request.params['code']
-        response = client.auth_code.get_token(verifier, redirect_uri: 'http://localhost:4567/oauth/callback', scope: 'app')
-
-        session[:access_token] = response.token
+      def callback_phase
+        puts 'aight dawgggg'
       end
-      
+
+      def build_access_token
+        verifier = params[:code]
+        puts 'Code is: ' + verifier
+        response = client.auth_code.get_token(verifier, redirect_uri: 'http://localhost:4567/oauth/callback', scope: 'app')
+        session[:access_token] = response.token
+        puts 'Token is: ' + session[:access_token]
+        return session[:access_token]
+      end
+
+      def auth_hash
+        OmniAuth::Utils.deep_merge(super(), {
+          'provider' => 'smartthings',
+          'uid' => 'Jared',
+        })
+      end
     end
   end
 end
